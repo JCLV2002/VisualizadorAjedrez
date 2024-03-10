@@ -181,6 +181,49 @@ async function  pasoApaso() {
 i++;
   
 }
+function moverCaballo(posicionInicial, filaDestino, columnaDestino, esBlanco) {
+  var tabla = document.getElementById("Tablero");
+  var renglonInicial = parseInt(posicionInicial.charAt(1));
+  var columnaInicial = convertirLetraNumero(posicionInicial.charAt(0));
+
+  // Verificar si el movimiento es válido para un caballo
+  var movimientosValidos = [
+    [2, 1],
+    [2, -1],
+    [-2, 1],
+    [-2, -1],
+    [1, 2],
+    [1, -2],
+    [-1, 2],
+    [-1, -2]
+  ];
+
+  for (var i = 0; i < movimientosValidos.length; i++) {
+    var nuevoRenglon = renglonInicial + movimientosValidos[i][0];
+    var nuevaColumna = columnaInicial + movimientosValidos[i][1];
+
+    if (
+      nuevoRenglon === filaDestino &&
+      nuevaColumna === columnaDestino &&
+      nuevoRenglon >= 1 &&
+      nuevoRenglon <= 8 &&
+      nuevaColumna >= 0 &&
+      nuevaColumna <= 7
+    ) {
+      // Si el movimiento es válido, actualiza el tablero
+      if (esBlanco) {
+        tabla.rows[filaDestino].cells[columnaDestino].style =
+          "background-image: url(./img/CaballoB.png); background-size:cover;";
+      } else {
+        tabla.rows[filaDestino].cells[columnaDestino].style =
+          "background-image: url(./img/CaballoN.png); background-size:cover;";
+      }
+      return true; // El movimiento fue exitoso
+    }
+  }
+  return false; // El movimiento no fue válido
+}
+
 
 function tieneMayusculas(cadena) {
   return /[A-Z]/.test(cadena);
