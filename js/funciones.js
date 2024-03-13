@@ -130,13 +130,13 @@ async function pasoApaso() {
   var tabla = document.getElementById("Tablero");
   var lineas = celdas.split("\n");
   //for (let i = 0; i < lineas.length; i++) {
-  //alert(lineas[i]);
+  alert(lineas[i]);
   var tokens = lineas[i].split(" ");
   //for (let j = 1; j < tokens.length; j++) {
   //alert(tokens[j]);
   //alert(tieneMayusculas(tokens[j]));
   j = 1;
-  if (!tieneMayusculas(tokens[j])) {
+  if (!tieneMayusculas(tokens[i])) {
     //alert("Si soy un Peon y me moví a "+tokens[j]);
     var posicion = tokens[j].split(/(\d+)/);
     //El usar alert no se recomienda porque no puedes hacer nada en la página, se recomienda usar el console.log
@@ -468,6 +468,20 @@ function moverRey(posicionInicial, filaDestino, columnaDestino, esBlanco) {
   return false; // El movimiento no fue válido para un rey
 }
 
+//funcion completo
+document.addEventListener('DOMContentLoaded', function() {
+  const button = document.querySelector('.button2');
+
+  button.addEventListener('click', async function() {
+      // Llama a la función pasoApaso 100 veces
+      for (let i = 0; i < 50; i++) {
+          await pasoApaso();
+      }
+      if (i === 50){
+        alert("Fin de la partida");
+      }
+  });
+});
 
 function tieneMayusculas(cadena) {
   return /[A-Z]/.test(cadena);
@@ -515,4 +529,8 @@ async function test() {
     salida += i + "<br>";
     document.getElementById("out").innerHTML = salida;
   }
+}
+
+function mostrarAlerta() {
+  alert("Aun no esta terminado el juego, tengo problemas con la logica, aun lo sigo trabajando. UNA DISCULPA.");
 }
